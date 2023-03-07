@@ -15,6 +15,10 @@ fn fizzbuzz(number: u32) {
 fn main() {
     println!("Unnecessarily complex FizzBuzz");
 
+    if let Ok(number) = std::env::args().nth(1).unwrap_or_default().parse() {
+        return fizzbuzz(number);
+    }
+
     loop {
         println!("Enter a number:");
 
@@ -33,8 +37,7 @@ fn main() {
             }
         };
 
-        fizzbuzz(number);
-        return;
+        return fizzbuzz(number);
     }
 }
 
