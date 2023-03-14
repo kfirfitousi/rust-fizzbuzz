@@ -1,41 +1,9 @@
-use colored::Colorize;
-use std::fmt::{Display, Formatter, Result};
+mod fizzbuzz;
 
-enum FizzBuzz {
-    Fizz,
-    Buzz,
-    FizzBuzz,
-    Number(u32),
-}
-
-impl FizzBuzz {
-    fn new(number: u32) -> Self {
-        match (number % 5 == 0, number % 3 == 0) {
-            (true, true) => FizzBuzz::FizzBuzz,
-            (false, true) => FizzBuzz::Fizz,
-            (true, false) => FizzBuzz::Buzz,
-            (false, false) => FizzBuzz::Number(number),
-        }
-    }
-}
-
-impl Display for FizzBuzz {
-    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-        match self {
-            FizzBuzz::Fizz => write!(f, "{}", "Fizz".blue()),
-            FizzBuzz::Buzz => write!(f, "{}", "Buzz".yellow()),
-            FizzBuzz::FizzBuzz => write!(f, "{}{}", "Fizz".blue(), "Buzz".yellow()),
-            FizzBuzz::Number(number) => write!(f, "{}", number),
-        }
-    }
-}
-
-fn fizzbuzz(number: u32) {
-    (1..=number).for_each(|x| println!("{}", FizzBuzz::new(x)))
-}
+use fizzbuzz::fizzbuzz;
 
 fn main() {
-    println!("Unnecessarily complex FizzBuzz");
+    println!("FizzBuzz");
 
     if let Ok(number) = std::env::args().nth(1).unwrap_or_default().parse() {
         return fizzbuzz(number);
